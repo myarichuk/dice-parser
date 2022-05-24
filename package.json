@@ -1,8 +1,7 @@
 {
   "name": "dice-parser",
   "version": "0.1.0",
-  "description": "simple dice notation parser",
-  "main": "build/src/index.js",
+  "description": "A dice notation parser, supports Roll20 spec",
   "types": "build/src/index.d.ts",
   "files": [
     "build/src"
