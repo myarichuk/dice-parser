@@ -1,4 +1,5 @@
 import {diceParser} from '../src/diceParser';
+import {Streams} from '@masala/parser';
 
 describe('diceParser', () => {
   it.each`
@@ -6,8 +7,18 @@ describe('diceParser', () => {
     ${'d12'} | ${1}      | ${12}
     ${'3d4'} | ${3}      | ${4}
     ${'2d9'} | ${2}      | ${9}
-  `("should parse '$expr'", ({expr, diceCount, diceSides}) => {
-    const parseResult = diceParser.run(expr);
-    expect(2).toBe(2);
+  `("should successfully parse '$expr'", ({expr, diceCount, diceSides}) => {
+    const parsed = diceParser.parse(Streams.ofString(expr));
+
+    expect(parsed.isAccepted()).toBeTruthy(); //sanity check
+
+    const parsedDice = parsed.value;
+    expect(parsedDice.diceCount).toBe(diceCount);
+    expect(parsedDice.diceSides).toBe(diceSides);
+  });
+
+  it('should fail when dice sides is missing', () => {
+    const parsed = diceParser.parse(Streams.ofString('3d'));
+    expect(parsed.isAccepted()).toBeFalsy();
   });
 });

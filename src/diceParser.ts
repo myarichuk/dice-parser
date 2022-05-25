@@ -1,5 +1,17 @@
-import {digits, choice, char, sequenceOf} from 'arcsecond';
+import {C, N, F, Tuple} from '@masala/parser';
 
-// char and str will parse specific sequences
-const diceLetter = choice([char('d'), char('D')]);
-export const diceParser = sequenceOf([digits, diceLetter, digits]);
+export interface Dice {
+  diceCount: number;
+  diceSides: number;
+}
+
+export const diceParser = F.try(N.digits())
+  .or(F.returns(1))
+  .then(C.charIn('dD').drop())
+  .then(N.integer())
+  .map((parsed: Tuple<number>) => {
+    return {
+      diceCount: parsed.value.length === 1 ? 1 : parsed.first(),
+      diceSides: parsed.last(),
+    } as Dice;
+  });
