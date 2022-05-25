@@ -1,12 +1,27 @@
 {
-  "extends": "./node_modules/gts/tsconfig-google.json",
+  "extends": "./node_modules/gts/tsconfig-google.json",  
   "compilerOptions": {
-    "rootDir": "./src",
+    "declaration": true,
+    "importHelpers": true,
+    "module": "CommonJS",
+    "moduleResolution": "node",
     "outDir": "build",
+    "rootDir": ".",
+    "strict": true,
+    "target": "es2021",
+    "experimentalDecorators": true,
+    "noImplicitAny": true,
+    "preserveConstEnums": true,
+    "composite": true,
+    "lib": [
+      "DOM"
+    ]
   },
   "include": [
-    "src/**/*.ts",
-    "test/**/*.ts"
+    "src/**/*"
   ],
-  "skipLibCheck": true                                 /* Skip type checking all .d.ts files. */
+  "exclude": [
+    "src/parsers/**/*"
+  ]
 }
+
