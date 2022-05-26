@@ -1,12 +1,6 @@
 import {C, F, N, Tuple} from '@masala/parser';
 import {diceExprParser} from './diceExprParser';
-import {Dice} from './types';
-
-export interface BinaryExpression {
-  left: number | Dice;
-  operator: string;
-  right: number | Dice;
-}
+import {BinaryExpression} from './types';
 
 const operator = C.charIn('+-*/');
 const whitespace = C.char(' ').optrep().drop();
