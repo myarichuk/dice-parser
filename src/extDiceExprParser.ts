@@ -9,14 +9,14 @@ export interface BinaryExpression {
   right: number | Dice;
 }
 
-const binaryOperator = () => C.charIn('+-*/');
-
-const operand = F.try(diceExprParser).or(constantExprParser);
+const operator = C.charIn('+-*/');
+const whitespace = C.char(' ').optrep().drop();
+const operand = F.try(diceExprParser).or(constantExprParser); //if not a dice expression -> backtrack
 
 export const extDiceExprParser = operand
-  .then(C.char(' ').optrep().drop()) //ignore whitespaces
-  .then(binaryOperator())
-  .then(C.char(' ').optrep().drop()) //ignore whitespaces
+  .then(whitespace) //ignore whitespaces
+  .then(operator)
+  .then(whitespace) //ignore whitespaces
   .then(operand)
   .map((parsed: Tuple<unknown>) => {
     return {
