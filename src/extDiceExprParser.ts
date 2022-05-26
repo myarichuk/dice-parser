@@ -7,6 +7,7 @@ const whitespace = C.char(' ').optrep().drop();
 const constantExprParser = N.digits();
 const operand = F.try(diceExprParser).or(constantExprParser); //if not a dice expression -> backtrack
 
+//note that in this case there is no operator precedence (* or / should be evaluated before + or -)
 export function extDiceExprParser(): SingleParser<BinaryExpression> {
   return operand
     .then(whitespace)
@@ -22,16 +23,3 @@ export function extDiceExprParser(): SingleParser<BinaryExpression> {
       } as BinaryExpression;
     });
 }
-
-// export const extDiceExprParser = operand
-//   .then(whitespace) //ignore whitespaces
-//   .then(operator)
-//   .then(whitespace) //ignore whitespaces
-//   .then(operand)
-//   .map((parsed: Tuple<unknown>) => {
-//     return {
-//       left: parsed.value[0],
-//       operator: parsed.value[1],
-//       right: parsed.value[2],
-//     } as BinaryExpression;
-//   });
