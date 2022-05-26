@@ -4,6 +4,7 @@
     "noEmit": true,
     "moduleResolution": "Node"
   },
+  "include": ["../src/*.ts"],
   "references": [
     {"path": ".."}
   ]

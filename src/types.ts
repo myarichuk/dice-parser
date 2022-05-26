@@ -4,7 +4,7 @@ export interface Dice {
 }
 
 export interface BinaryExpression {
-  left: number | Dice | BinaryExpression;
+  left: number | Dice;
   operator: string;
-  right: number | Dice;
+  right: number | Dice | BinaryExpression;
 }
