@@ -1,6 +1,5 @@
-import {C, F, Tuple} from '@masala/parser';
+import {C, F, N, Tuple} from '@masala/parser';
 import {diceExprParser} from './diceExprParser';
-import {constantExprParser} from './constantExprParser';
 import {Dice} from './types';
 
 export interface BinaryExpression {
@@ -11,6 +10,7 @@ export interface BinaryExpression {
 
 const operator = C.charIn('+-*/');
 const whitespace = C.char(' ').optrep().drop();
+const constantExprParser = N.digits();
 const operand = F.try(diceExprParser).or(constantExprParser); //if not a dice expression -> backtrack
 
 export const extDiceExprParser = operand
