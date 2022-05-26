@@ -1,17 +1,13 @@
 import {C, N, F, Tuple} from '@masala/parser';
+import {Dice} from './types';
 
-export interface Dice {
-  diceCount: number;
-  diceSides: number;
-}
-
-export const diceParser = F.try(N.digits())
-  .or(F.returns(1))
+export const diceExprParser = F.try(N.digits())
+  .or(F.returns(1)) //try fails -> this means no digit -> then return constant value
   .then(C.charIn('dD').drop())
   .then(N.integer())
   .map((parsed: Tuple<number>) => {
     return {
-      diceCount: parsed.value.length === 1 ? 1 : parsed.first(),
+      diceCount: parsed.first(),
       diceSides: parsed.last(),
     } as Dice;
   });
