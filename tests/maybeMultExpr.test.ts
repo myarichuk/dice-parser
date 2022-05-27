@@ -1,6 +1,6 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
-import {maybeMultExpr} from '../src/extDiceExprParser';
+import {maybeMultDivExpr} from '../src/maybeMultDivExpr';
 import {Streams} from '@masala/parser';
 
 describe('maybeMultExpr', () => {
@@ -13,7 +13,7 @@ describe('maybeMultExpr', () => {
   `(
     "should successfully parse two-operand '$expr'",
     ({expr, left, op, right}) => {
-      const parsed = maybeMultExpr().parse(Streams.ofString(expr));
+      const parsed = maybeMultDivExpr().parse(Streams.ofString(expr));
       expect(parsed.isAccepted()).toBe(true); //sanity check
 
       const parsedRight = parsed.value.array()[2];
@@ -32,7 +32,7 @@ describe('maybeMultExpr', () => {
   `(
     "should successfully parse three-operand '$expr'",
     ({expr, left, op1, middle, op2, right}) => {
-      const parsed = maybeMultExpr().parse(Streams.ofString(expr));
+      const parsed = maybeMultDivExpr().parse(Streams.ofString(expr));
       //TODO: split this test into TWO operands and more than two operands (parsed.value is an array that contains all of the values in sequence)
       expect(parsed.isAccepted()).toBe(true); //sanity check
 

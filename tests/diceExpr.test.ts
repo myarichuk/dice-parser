@@ -1,6 +1,6 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
-import {diceExprParser} from '../src/diceExprParser';
+import {diceExpr} from '../src/diceExpr';
 import {Streams} from '@masala/parser';
 
 describe('diceExprParser', () => {
@@ -10,7 +10,7 @@ describe('diceExprParser', () => {
     ${'3d4'} | ${3}      | ${4}
     ${'2d9'} | ${2}      | ${9}
   `("should successfully parse '$expr'", ({expr, diceCount, diceSides}) => {
-    const parsed = diceExprParser.parse(Streams.ofString(expr));
+    const parsed = diceExpr().parse(Streams.ofString(expr));
 
     expect(parsed.isAccepted()).toBeTruthy(); //sanity check
 
@@ -20,7 +20,7 @@ describe('diceExprParser', () => {
   });
 
   it('should fail when dice sides is missing', () => {
-    const parsed = diceExprParser.parse(Streams.ofString('3d'));
+    const parsed = diceExpr().parse(Streams.ofString('3d'));
     expect(parsed.isAccepted()).toBeFalsy();
   });
 });
