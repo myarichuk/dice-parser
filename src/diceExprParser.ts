@@ -2,8 +2,8 @@
 The idea:
 ---------
 terminal := dice | Number | "(" ^ Expression ^ ")"
-multExpr      := terminal ^ (("*" | "/") ^ terminal)*
-diceExpr   := multExpr    ^ (("+" | "-") ^ multExpr)*
+multExpr := terminal ^ (("*" | "/") ^ terminal)*
+diceExpr := multExpr ^ (("+" | "-") ^ multExpr)*
 */
 
 import {C, F, N, SingleParser, TupleParser, Tuple} from '@masala/parser';
