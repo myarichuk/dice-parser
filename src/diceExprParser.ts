@@ -1,7 +1,7 @@
 /*
 The idea:
 ---------
-terminal := dice | Number | "(" ^ Expression ^ ")"
+terminal := dice | number | "(" ^ diceExpr ^ ")"
 multExpr := terminal ^ (("*" | "/") ^ terminal)*
 diceExpr := multExpr ^ (("+" | "-") ^ multExpr)*
 */
