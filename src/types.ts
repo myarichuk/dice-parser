@@ -3,8 +3,7 @@ export interface Dice {
   diceSides: number;
 }
 
-export interface BinaryExpression {
-  left: number | Dice | BinaryExpression;
+export interface DiceExpression {
+  operands: Array<Dice | DiceExpression>;
   operator: string;
-  right: number | Dice | BinaryExpression;
 }
