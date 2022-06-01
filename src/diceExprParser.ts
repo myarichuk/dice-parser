@@ -6,10 +6,10 @@ multExpr := terminal ^ (("*" | "/") ^ terminal)*
 diceExpr := multExpr ^ (("+" | "-") ^ multExpr)*
 */
 
-import {C, F, N, SingleParser, TupleParser, Tuple} from '@masala/parser';
+import {C, F, N, SingleParser, TupleParser} from '@masala/parser';
 import {addOrSubOperator, multOrDivOperator, whitespace} from './common';
 import {diceParser} from './diceParser';
-import {DiceExpression} from './types';
+import {parsedToAst} from './utils';
 
 const parenthesisExpression: TupleParser<unknown> = C.char('(')
   .drop()
@@ -17,25 +17,6 @@ const parenthesisExpression: TupleParser<unknown> = C.char('(')
   .then(F.lazy(diceExprParser))
   .then(whitespace)
   .then(C.char(')').drop());
-
-function isNumeric(val: unknown): val is number {
-  return !isNaN(val as number);
-}
-
-const parsedToAst = (parsed: Tuple<unknown>) => {
-  if (parsed.size() === 1) {
-    return parsed.at(0);
-  } else {
-    return {
-      operands: parsed
-        .array()
-        .filter(val => typeof val === 'object' || isNumeric(val)),
-      operator: parsed
-        .array()
-        .find(val => typeof val !== 'object' && !isNumeric(val)),
-    } as DiceExpression;
-  }
-};
 
 function terminal(): TupleParser<unknown> {
   return F.try(F.try(diceParser()).or(N.digits())).or(parenthesisExpression);
