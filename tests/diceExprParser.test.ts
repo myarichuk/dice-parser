@@ -3,7 +3,12 @@ import {diceExprParser} from '../src/diceExprParser';
 describe('diceExprParser', () => {
   it.each`
     expr              | result
+    ${'123'}          | ${123}
+    ${'2d6'}          | ${{diceCount: 2, diceSides: 6}}
     ${'3+4'}          | ${{operands: [3, 4], operator: '+'}}
+    ${'3+(4)'}        | ${{operands: [3, 4], operator: '+'}}
+    ${'3+((4))'}      | ${{operands: [3, 4], operator: '+'}}
+    ${'(3-((4)))'}    | ${{operands: [3, 4], operator: '-'}}
     ${'6*5+3'}        | ${{operands: [{operands: [6, 5], operator: '*'}, 3], operator: '+'}}
     ${'(6* 5)+3'}     | ${{operands: [{operands: [6, 5], operator: '*'}, 3], operator: '+'}}
     ${'2d9+  4'}      | ${{operands: [{diceCount: 2, diceSides: 9}, 4], operator: '+'}}

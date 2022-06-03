@@ -15,7 +15,7 @@
     "compile": "tsc",
     "build": "tsc",
     "fix": "gts fix",
-    "posttest": "npm.cmd run lint"
+    "posttest": "npm run lint"
   },
   "devDependencies": {
     "@types/jest": "^27.5.1",
