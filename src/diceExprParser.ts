@@ -4,6 +4,7 @@ The idea:
 terminal := dice | number | "(" ^ diceExpr ^ ")"
 multExpr := terminal ^ (("*" | "/") ^ terminal)*
 diceExpr := multExpr ^ (("+" | "-") ^ multExpr)*
+credit for the awesome explanation: https://medium.com/@armin.heller/parser-combinator-gotchas-2792deac4531
 */
 
 import {C, F, N, SingleParser, TupleParser, Tuple} from '@masala/parser';
