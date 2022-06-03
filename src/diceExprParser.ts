@@ -10,7 +10,7 @@ import {C, F, N, SingleParser, TupleParser, Tuple} from '@masala/parser';
 import {addOrSubOperator, multOrDivOperator, whitespace} from './common';
 import {diceParser} from './diceParser';
 import {Dice, DiceExpression} from './types';
-import {parsedToAst} from './utils';
+import {parsedToAst as parseToAst} from './utils';
 
 function terminal(): TupleParser<unknown> {
   return F.try(F.try(diceParser()).or(N.digits())).or(parenthesis());
@@ -25,7 +25,7 @@ function addend(): SingleParser<unknown> {
         .then(terminal().then(whitespace))
         .optrep()
     )
-    .map(parsedToAst);
+    .map(parseToAst);
 }
 
 function parenthesis(): TupleParser<unknown> {
@@ -43,5 +43,5 @@ export function diceExprParser(): SingleParser<DiceExpression | Dice | number> {
     .then(
       addOrSubOperator.then(whitespace).then(addend().then(whitespace)).optrep()
     )
-    .map((parsed: Tuple<unknown>) => parsedToAst(parsed));
+    .map((parsed: Tuple<unknown>) => parseToAst(parsed));
 }
