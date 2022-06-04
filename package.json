@@ -8,10 +8,25 @@
   ],
   "engines": {
     "node": ">=14.0.0"
-  },  
-  "release": { "branches": [ "main" ] },  
+  },
+  "release": {
+    "branches": [
+      "main"
+    ]
+  },
   "license": "MIT",
-  "keywords": ["dice-parser","dice roller", "d20", "roll20", "rpg", "dice", "d6", "dice-roller", "parser", "dice parser"],
+  "keywords": [
+    "dice-parser",
+    "dice roller",
+    "d20",
+    "roll20",
+    "rpg",
+    "dice",
+    "d6",
+    "dice-roller",
+    "parser",
+    "dice parser"
+  ],
   "scripts": {
     "test": "jest",
     "lint": "gts lint",
