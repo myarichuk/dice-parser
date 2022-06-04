@@ -1,12 +1,7 @@
 import {Dice, DiceExpression} from './types';
 import {Tuple} from '@masala/parser';
 
-export const getDiceMinMax = (dice: Dice) => {
-  return {
-    min: dice.diceCount,
-    max: dice.diceCount * dice.diceSides,
-  };
-};
+
 
 export function isNumeric(val: unknown): val is number {
   return !isNaN(val as number);
