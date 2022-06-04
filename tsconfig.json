@@ -4,7 +4,7 @@
     "declaration": true,
     "declarationMap": true,
     "importHelpers": true,
-    "module": "ES6",
+    "module": "system",
     "outDir": "./lib",
     "moduleResolution": "node",
     "strict": true,
@@ -16,6 +16,7 @@
     "noImplicitReturns": true,
     "preserveConstEnums": true,
     "composite": true,
+    "outFile": "./lib/index.js"
   },
   "files": [],  
   "references": [
