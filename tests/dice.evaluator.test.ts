@@ -1,7 +1,14 @@
 import {diceParser} from '../src/dice.parser';
 import {Streams} from '@masala/parser';
 import rollDice from '../src/dice.evaluator';
-import {getDiceMinMax} from '../src/utils';
+import {Dice} from '../src/types';
+
+const getDiceMinMax = (dice: Dice) => {
+  return {
+    min: dice.diceCount,
+    max: dice.diceCount * dice.diceSides,
+  };
+};
 
 describe('rollDice', () => {
   it.each(['2d6', '3d9', 'd6', '12d12', '12d100'])(
