@@ -2,7 +2,6 @@ import {diceExprParser} from '../src/diceExpr.parser';
 import {Streams} from '@masala/parser';
 import evaluateDiceExpression from '../src/diceExpr.evaluator';
 import {DiceExpression} from '../src/types';
-import exp from 'constants';
 
 function assertResults(
   diceExpr: DiceExpression,
