@@ -2,7 +2,13 @@ import rollDice from './dice.evaluator';
 import {Dice, DiceExpression} from './types';
 import {isDice, isDiceExpression, isNumeric} from './utils';
 
-export default function rollDiceExpression(expr: DiceExpression): number {
+export default function evaluateDiceExpression(
+  expr: DiceExpression | Dice | number
+): number {
+  if (isNumeric(expr)) return expr as number;
+
+  if (isDice(expr)) return rollDice(expr as Dice);
+
   let result = 0;
 
   for (let i = 0; i < expr.operands.length; i++) {
@@ -19,7 +25,7 @@ export default function rollDiceExpression(expr: DiceExpression): number {
       result = evaluateOperator(
         expr.operator,
         result,
-        rollDiceExpression(current as DiceExpression)
+        evaluateDiceExpression(current as DiceExpression)
       );
     else throw new Error(`Encountered unrecognized type for value ${current}`);
   }

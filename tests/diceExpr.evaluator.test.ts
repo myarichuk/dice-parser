@@ -1,7 +1,8 @@
 import {diceExprParser} from '../src/diceExpr.parser';
 import {Streams} from '@masala/parser';
-import rollDiceExpression from '../src/diceExpr.evaluator';
+import evaluateDiceExpression from '../src/diceExpr.evaluator';
 import {DiceExpression} from '../src/types';
+import exp from 'constants';
 
 function assertResults(
   diceExpr: DiceExpression,
@@ -9,13 +10,30 @@ function assertResults(
   expectedMax: number
 ) {
   for (let i = 0; i < 100; i++) {
-    const result = rollDiceExpression(diceExpr);
+    const result = evaluateDiceExpression(diceExpr);
     expect(result).toBeGreaterThanOrEqual(expectedMin);
     expect(result).toBeLessThanOrEqual(expectedMax);
   }
 }
 
 describe('rollDiceExpression', () => {
+  it('can correctly evaluate scalars', () => {
+    const diceExpression = diceExprParser().parse(
+      Streams.ofString('123')
+    ).value;
+
+    expect(evaluateDiceExpression(diceExpression)).toBe(123);
+  });
+
+  it('can correctly evaluate 3d6', () => {
+    const diceExpression = diceExprParser().parse(
+      Streams.ofString('3d6')
+    ).value;
+
+    expect(evaluateDiceExpression(diceExpression)).toBeGreaterThanOrEqual(3);
+    expect(evaluateDiceExpression(diceExpression)).toBeLessThanOrEqual(18);
+  });
+
   it('can correctly evaluate 3d6 + 5', () => {
     const diceExpression = diceExprParser().parse(Streams.ofString('3d6+5'))
       .value as DiceExpression;
