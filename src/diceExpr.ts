@@ -8,9 +8,9 @@ export default class DiceExpr {
 
   constructor(diceExpr: string) {
     const parseResult = diceExprParser().parse(Streams.ofString(diceExpr));
-    if (!parseResult.isAccepted())
+    if (!parseResult.isAccepted()) {
       throw new Error(`failed to parse '${diceExpr}'`);
-
+    }
     this.data = parseResult.value;
   }
 
