@@ -1,8 +1,13 @@
 {
-  "name": "dice-parser",
+  "name": "dice-expr-parser",
   "version": "0.0.0-development",
   "description": "A dice expression parser, supports partial Roll20 spec",
   "types": "lib/index.d.ts",
+  "author": {
+    "name": "Michael Yarichuk",
+    "email": "michael.yarichuk@gmail.com",
+    "url": "http://github.com/myarichuk/dice-parser"
+  },
   "files": [
     "/lib"
   ],
