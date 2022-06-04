@@ -1,8 +1,6 @@
 import {Dice, DiceExpression} from './types';
 import {Tuple} from '@masala/parser';
 
-
-
 export function isNumeric(val: unknown): val is number {
   return !isNaN(val as number);
 }
