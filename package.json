@@ -1,7 +1,7 @@
 {
   "name": "dice-parser",
   "version": "0.0.0-development",
-  "description": "A dice notation parser, supports partial Roll20 spec",
+  "description": "A dice expression parser, supports partial Roll20 spec",
   "types": "lib/index.d.ts",
   "files": [
     "/lib"
