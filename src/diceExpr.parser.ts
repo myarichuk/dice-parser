@@ -8,10 +8,13 @@ credit for the awesome explanation: https://medium.com/@armin.heller/parser-comb
 */
 
 import {C, F, N, SingleParser, TupleParser, Tuple} from '@masala/parser';
-import {addOrSubOperator, multOrDivOperator, whitespace} from './common';
-import {diceParser} from './diceParser';
+import {diceParser} from './dice.parser';
 import {Dice, DiceExpression} from './types';
 import {parsedToAst as parseToAst} from './utils';
+
+const addOrSubOperator = C.charIn('+-');
+const multOrDivOperator = C.charIn('*/');
+const whitespace = C.char(' ').optrep().drop();
 
 function terminal(): TupleParser<unknown> {
   return F.try(F.try(diceParser()).or(N.digits())).or(parenthesis());

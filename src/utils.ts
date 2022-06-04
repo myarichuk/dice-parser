@@ -1,18 +1,25 @@
 import {Dice, DiceExpression} from './types';
 import {Tuple} from '@masala/parser';
 
+export const getDiceMinMax = (dice: Dice) => {
+  return {
+    min: dice.diceCount,
+    max: dice.diceCount * dice.diceSides,
+  };
+};
+
 export function isNumeric(val: unknown): val is number {
   return !isNaN(val as number);
 }
 
-function isDice(object: unknown): object is Dice {
+export function isDice(object: unknown): object is Dice {
   return (
     Object.prototype.hasOwnProperty.call(object, 'diceCount') &&
     Object.prototype.hasOwnProperty.call(object, 'diceSides')
   );
 }
 
-function isDiceExpression(object: unknown): object is DiceExpression {
+export function isDiceExpression(object: unknown): object is DiceExpression {
   return (
     Object.prototype.hasOwnProperty.call(object, 'operands') &&
     Object.prototype.hasOwnProperty.call(object, 'operator')

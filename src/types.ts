@@ -4,6 +4,6 @@ export interface Dice {
 }
 
 export interface DiceExpression {
-  operands: Array<Dice | DiceExpression>;
+  operands: Array<Dice | DiceExpression | number>;
   operator: string;
 }

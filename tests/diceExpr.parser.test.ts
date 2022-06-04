@@ -1,5 +1,6 @@
 import {Streams} from '@masala/parser';
-import {diceExprParser} from '../src/diceExprParser';
+import {diceExprParser} from '../src/diceExpr.parser';
+
 describe('diceExprParser', () => {
   it.each`
     expr              | result
@@ -14,6 +15,7 @@ describe('diceExprParser', () => {
     ${'2d9+  4'}      | ${{operands: [{diceCount: 2, diceSides: 9}, 4], operator: '+'}}
     ${'2d9 +4+ 5d8'}  | ${{operands: [{diceCount: 2, diceSides: 9}, 4, {diceCount: 5, diceSides: 8}], operator: '+'}}
     ${'(2d9 +4)*5d8'} | ${{operands: [{operands: [{diceCount: 2, diceSides: 9}, 4], operator: '+'}, {diceCount: 5, diceSides: 8}], operator: '*'}}
+    ${'2d9 +4* 5d8'}  | ${{operands: [{diceCount: 2, diceSides: 9}, {operands: [4, {diceCount: 5, diceSides: 8}], operator: '*'}], operator: '+'}}
   `("should successfully parse '$expr'", ({expr, result}) => {
     const parsed = diceExprParser().parse(Streams.ofString(expr));
 

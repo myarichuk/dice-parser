@@ -1,6 +1,6 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
-import {diceParser} from '../src/diceParser';
+import {diceParser} from '../src/dice.parser';
 import {Streams} from '@masala/parser';
 
 describe('diceParser', () => {
