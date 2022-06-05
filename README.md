@@ -5,7 +5,7 @@ Can parse and evaluate for random numbers expressions such as ``3d6 * 5 + (2d6 /
 
 ### Example - Parse and evaluate expression
 ```typescript
-import {DiceExpr} from 'dice-expr-parser';
+import DiceExpr from 'dice-expr-parser';
 
 const diceExpr = new DiceExpr('2d4+5-3d6'); //can parse arithmetic expressions
 const rollResult = diceExpr.roll(); //evaluate and randomly roll all dice subexpressions
