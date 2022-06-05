@@ -3,6 +3,7 @@
   "version": "0.0.0-development",
   "description": "A dice expression parser, supports partial Roll20 spec",
   "types": "lib/index.d.ts",
+  "main": "lib/index.js",
   "author": {
     "name": "Michael Yarichuk",
     "email": "michael.yarichuk@gmail.com",
