@@ -3,31 +3,13 @@
 This library contains a simple RPG dice notation parser (3d6+3 and such) written in typescript. Implements part of [Roll20 dice expression spec](https://help.roll20.net/hc/en-us/articles/360037773133-Dice-Reference)  
 Can parse and evaluate for random numbers expressions such as ``3d6 * 5 + (2d6 / 4)``
 
-### Example 1 - Parse an expression
+### Example - Parse and evaluate expression
 ```typescript
-import {Streams} from '@masala/parser';
-import {diceExprParser} from 'diceExpr.parser';
-const parsed = diceExprParser().parse(Streams.ofString('(2d6 +4)*3d4'));
-```
-Accessing ``parsed.value`` will yield the following object:
-```typescript
-{
-  operands: [
-    {operands: [{diceCount: 2, diceSides: 6}, 4], operator: '+'},
-    {diceCount: 3, diceSides: 4},
-  ],
-  operator: '*',
-}
-```
-### Example 2 - Evaluate a dice expression (simulate complex dice rolls)
-```typescript
-import {Streams} from '@masala/parser';
-import {diceExprParser} from 'diceExpr.parser';
-import evaluateDiceExpression from 'diceExpr.evaluator';
-const parsed = diceExprParser().parse(Streams.ofString('(2d6 +4)*3d4'));
-const evaluationResult = evaluateDiceExpression(parsed.value);
-```
+import {DiceExpr} from 'dice-expr-parser';
 
+const diceExpr = new DiceExpr('2d4+5-3d6'); //can parse arithmetic expressions
+const rollResult = diceExpr.roll(); //evaluate and randomly roll all dice subexpressions
+```
 ### Implementation TODO:
 * Exploding Dice
 * Dice Drop/Keep
