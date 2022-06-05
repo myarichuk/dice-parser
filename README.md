@@ -1,5 +1,5 @@
 [![Build & Test](https://github.com/myarichuk/dice-parser/actions/workflows/build-and-test.yml/badge.svg?branch=main)](https://github.com/myarichuk/dice-parser/actions/workflows/build-and-test.yml)
-# dice-parser
+# dice-expr-parser
 This library contains a simple RPG dice notation parser (3d6+3 and such) written in typescript. Implements part of [Roll20 dice expression spec](https://help.roll20.net/hc/en-us/articles/360037773133-Dice-Reference)  
 Can parse and evaluate for random numbers expressions such as ``3d6 * 5 + (2d6 / 4)``
 
