@@ -9,6 +9,7 @@
     "email": "michael.yarichuk@gmail.com",
     "url": "http://github.com/myarichuk/dice-parser"
   },
+  "type": "module",
   "files": [
     "/lib"
   ],
