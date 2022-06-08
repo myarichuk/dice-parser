@@ -5,29 +5,25 @@ import {isDice, isDiceExpression, isNumeric} from './utils';
 export default function evaluateDiceExpression(
   expr: DiceExpression | Dice | number
 ): number {
-  if (isNumeric(expr)) return expr as number;
+  if (isNumeric(expr)) return expr;
 
-  if (isDice(expr)) return rollDice(expr as Dice);
+  if (isDice(expr)) return rollDice(expr);
 
   let result = 0;
 
-  for (let i = 0; i < expr.operands.length; i++) {
-    const current = expr.operands[i];
-    if (isNumeric(current))
-      result = evaluateOperator(expr.operator, result, current as number);
-    else if (isDice(current))
+  for (const operand of expr.operands) {
+    if (isNumeric(operand))
+      result = evaluateOperator(expr.operator, result, operand);
+    else if (isDice(operand))
+      result = evaluateOperator(expr.operator, result, rollDice(operand));
+    else if (isDiceExpression(operand)) {
       result = evaluateOperator(
         expr.operator,
         result,
-        rollDice(current as Dice)
+        evaluateDiceExpression(operand)
       );
-    else if (isDiceExpression(current))
-      result = evaluateOperator(
-        expr.operator,
-        result,
-        evaluateDiceExpression(current as DiceExpression)
-      );
-    else throw new Error(`Encountered unrecognized type for value ${current}`);
+    } else
+      throw new Error(`Encountered unrecognized type for value ${operand}`);
   }
 
   return result;
