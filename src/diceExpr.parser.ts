@@ -20,7 +20,7 @@ function terminal(): TupleParser<unknown> {
   return F.try(F.try(diceParser()).or(N.digits())).or(parenthesis());
 }
 
-function addend(): SingleParser<unknown> {
+function multExpr(): SingleParser<unknown> {
   return terminal()
     .then(whitespace)
     .then(
@@ -42,10 +42,13 @@ function parenthesis(): TupleParser<unknown> {
 }
 
 export function diceExprParser(): SingleParser<DiceExpression | Dice | number> {
-  return addend()
+  return multExpr()
     .then(whitespace)
     .then(
-      addOrSubOperator.then(whitespace).then(addend().then(whitespace)).optrep()
+      addOrSubOperator
+        .then(whitespace)
+        .then(multExpr().then(whitespace))
+        .optrep()
     )
     .map((parsed: Tuple<unknown>) => parseToAst(parsed));
 }
